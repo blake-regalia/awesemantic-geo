@@ -1,0 +1,168 @@
+
+body {
+	font-family: arial;
+	background-color: rgba(0, 0, 6, 0.2);
+}
+
+#inspect {
+	display: table;
+	font-size: 10pt;
+}
+
+#inspect .row:hover {
+	background-color: aliceblue;
+	cursor: pointer !important;
+}
+
+.selected {
+	background-color: khaki !important;
+}
+
+.in_multiple_counties {
+	color: red;
+}
+
+
+.label-flag {
+	border: 1px solid transparent;
+	color: rgba(0,0,0, 0.4);
+
+	&.is_true:after {
+		content: "✓";
+		color: green;
+	}
+
+	&.is_pending:after {
+		content: "..";
+		color: gray;
+	}
+
+	&:hover {
+		border-color: grey;
+	}
+}
+
+.ntpp:before {
+	content: "ntpp";
+}
+.tpp:before {
+	content: "tpp";
+}
+.ec:before {
+	content: "ec";
+}
+.po:before {
+	content: "po";
+}
+.dc:before {
+	content: "dc";
+}
+
+.row {
+	display: table-row;
+
+	&>* {
+		display: table-cell;
+		padding: 0.5em 1em;
+	}
+
+	&:nth-child(even) {
+		background-color: rgba(255, 255, 255, 0.6);
+	}
+}
+
+.object-list:before {
+	content: "→";
+    display: inline;
+    position: absolute;
+    margin-left: -2em;
+    font-size: 9pt;
+}
+
+.object-list.inverse:before {
+	content: "of";
+    display: inline;
+    position: absolute;
+    margin-left: -2em;
+    font-size: 9pt;
+}
+
+.object-list.inverse {
+    font-size: 0.85em;
+}
+
+.object {
+	display: block;
+
+	&.iri>a {
+		color: #2980b9;
+	}
+
+	&>button {
+		background-color: rgba(255, 255, 255, 0.6);
+		border: 1px solid rgba(0, 0, 0, 0.6);
+		margin-bottom: 2px;
+		cursor: pointer;
+	}
+}
+
+.iri>a {
+	color: #2c3e50;
+}
+
+.predicate.inverse {
+	&:before {
+		content: "is ";
+		font-size: 9pt;
+		padding-right: 0.25em;
+	}
+}
+
+.literal {
+	&.datetime {
+		color: #16a085;
+	}
+
+	&.simple {
+		color: #d35400;
+		&:before {
+			content: '"';
+		}
+		&:after {
+			content: '"';
+		}
+	}
+
+	&.string {
+		color: #f39c12;
+
+		&:before {
+			content: '"';
+		}
+		&:after {
+			content: '"';
+		}
+	}
+}
+
+
+#map {
+	display: block;
+	visibility: hidden;
+    position: fixed;
+    height: calc(~"100% - 2em");
+    width: calc(~"100% - 55em");
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    margin: 1em;
+}
+
+.bar rect {
+	fill: steelblue
+}
+
+.bar text {
+	fill: #fff;
+	font: 10px sans-serif;
+}

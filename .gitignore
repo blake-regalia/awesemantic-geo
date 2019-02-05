@@ -1,0 +1,8 @@
+/build/
+/node_modules/
+/scrap/
+/data/
+/bin/
+*.sql
+/package-lock.json
+/dist/

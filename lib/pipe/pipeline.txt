@@ -1,0 +1,32 @@
+download-pbg-region
+extract-pbf
+construct-geometries
+match-wkd
+populate-points
+
+curating/unmatched.osm_all
+curating/geoms.osm_polygons
+
+compute/run-pg-pg
+compute/run-pl-pg
+compute/run-pl-pl
+
+/broad.sh
+
+/ntriplify
+
+
+npx graphy content.ttl.read -S '>http://dbpedia.org/resource/null' -O '>http://dbpedia.org/resource/null' \
+		--pipe util.dataset.tree --union \
+		--pipe content.ttl.write \
+		--inputs data/triples/*.ttl \
+	| node lib/ground/relations.js cardinal > data/ground-cardinal.json
+
+
+npx graphy content.ttl.read \
+		--pipe util.dataset.tree --union \
+		--pipe content.ttl.write \
+		--inputs data/triples/*_tpp_*.ttl \
+			data/triples/*_ntpp_*.ttl \
+			data/triples/*_broadlyTPP_*.ttl \
+	| node --max_old_space_size=8192 lib/ground/relations.js partonomy > data/ground-partonomy.json

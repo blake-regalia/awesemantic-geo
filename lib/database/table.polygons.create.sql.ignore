@@ -1,0 +1,45 @@
+
+-- places
+create table polygons
+	(
+		dbp_uri,
+		dbp_labels,
+		dbp_aliases,
+		dbp_types,
+		dbp_area_total,
+		dbp_points,
+		osm_id,
+		osm_polygons,
+		osm_polygons_area
+	)
+	as (
+		select
+			a.uri,
+			a.labels,
+			a.aliases,
+			a.types,
+			a.area_total,
+			a.points,
+			b.id,
+			b.polygons,
+			null::float
+		from dbp_places a
+		inner join osm_polygons b
+		on
+			a.uri = b.dbp_uri
+		-- where
+		-- 	b.validated = true
+	);
+
+create index polygons_polygons_idx on polygons using gist(osm_polygons);
+vacuum analyze polygons;
+
+update polygons
+	set osm_polygons = ST_CollectionExtract(
+		ST_MakeValid(osm_polygons), 3)
+	where not ST_IsValid(osm_polygons);
+
+update polygons
+	set osm_polygons_area = ST_Area(osm_polygons::geography)
+	where ST_IsValid(osm_polygons);
+

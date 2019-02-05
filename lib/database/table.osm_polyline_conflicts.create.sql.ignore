@@ -1,0 +1,7 @@
+
+-- open street map attempts
+create table osm_polyline_conflicts(
+	dbp_uri text primary key,
+	wikipedia text,
+	polylines geometry(multilinestring, 4326)[]
+);

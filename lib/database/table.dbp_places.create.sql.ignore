@@ -1,0 +1,11 @@
+
+-- dbpedia places
+create table dbp_places(
+	uri text primary key,
+	wikipedia text,
+	labels text[],
+	types text[],
+	points geometry(point, 4326)[],
+	area double precision,
+	attempts smallint default 0
+);

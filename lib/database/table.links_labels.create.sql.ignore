@@ -1,0 +1,8 @@
+
+create table links_labels (
+	dbp_uri text,
+	osm_id text,
+	labels text[]
+);
+
+create unique index links_labels_id on links_labels(dbp_uri, osm_id);

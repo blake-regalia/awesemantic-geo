@@ -1,0 +1,22 @@
+
+create view unlinked as
+	(
+		select a.*
+		from dbp_places a
+		left join osm_polygons b
+			on a.uri = b.dbp_uri
+		left join osm_polylines c
+			on a.uri = c.dbp_uri
+		left join osm_polygon_conflicts d
+			on a.uri = d.dbp_uri
+		left join osm_polyline_conflicts e
+			on a.uri = e.dbp_uri
+		left join links_labels f
+			on a.uri = f.dbp_uri
+		where
+			b.dbp_uri is null
+			and c.dbp_uri is null
+			and d.dbp_uri is null
+			and e.dbp_uri is null
+			and f.dbp_uri is null
+	);

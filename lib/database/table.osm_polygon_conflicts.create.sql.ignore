@@ -1,0 +1,7 @@
+
+-- open street map attempts
+create table osm_polygon_conflicts(
+	dbp_uri text primary key,
+	wikipedia text,
+	polygons geometry(multipolygon, 4326)[]
+);
